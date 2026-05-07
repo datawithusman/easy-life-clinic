@@ -2,11 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 :root {
   --primary: #0E7C6E;
   --accent: #5A3FA8;
+  --gold: #c9a968;
+  --gold-light: #e8ca7a;
+  --ivory: #f5f0e8;
+  --forest: #060f0e;
   --warning: #B8680A;
   --danger: #C0392B;
 }
@@ -20,6 +24,37 @@ body {
   background-color: #f8faf9;
   color: #1a1a1a;
 }
+
+/* ── Luxury Dark Utilities ─────────────────────────────── */
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(201, 169, 104, 0.12);
+  border-radius: 16px;
+}
+
+.gold-border-card {
+  background: rgba(6, 15, 14, 0.7);
+  border: 1px solid rgba(201, 169, 104, 0.14);
+  border-radius: 16px;
+  transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
+}
+
+.gold-border-card:hover {
+  border-color: rgba(201, 169, 104, 0.45);
+  box-shadow: 0 0 40px rgba(201, 169, 104, 0.09), 0 24px 48px rgba(0, 0, 0, 0.45);
+  transform: translateY(-2px);
+}
+
+.grain-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+  background-repeat: repeat;
+}
+
+/* ── Existing Component Classes (admin/dashboard compat) ── */
 
 @layer components {
   .btn-primary {
