@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  // LOCAL DEMO: SQLite (no signup needed, runs as a local file)
+  // FOR VERCEL: change to "postgresql" and update DATABASE_URL
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Note: SQLite doesn't support enums — values are validated in application code
+// Valid Role values: "PATIENT" | "ASSISTANT" | "ADMIN"
+// Valid ServiceType: "SKIN" | "HAIR" | "BOTH"
+// Valid ConsultType: "IN_PERSON" | "ONLINE"
+// Valid BookingStatus: "PENDING" | "CONFIRMED" | "CANCELLED" | "COMPLETED" | "SKIPPED"
+
+model User {
+  id        String    @id @default(cuid())
+  name      String
+  email     String    @unique
+  phone     String
+  password  String
+  role      String    @default("PATIENT")
+  createdAt DateTime  @default(now())
+  bookings  Booking[]
+}
+
+model Booking {
+  id              String   @id @default(cuid())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id])
+  serviceType     String
+  consultType     String   @default("IN_PERSON")
+  date            DateTime
+  queueNumber     Int
+  status          String   @default("PENDING")
+  paymentProofUrl String?
+  notes           String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Treatment {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  price       Int
+  category    String
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+}
+
+model Announcement {
+  id        String    @id @default(cuid())
+  title     String
+  message   String
+  type      String    @default("info")
+  isActive  Boolean   @default(true)
+  expiresAt DateTime?
+  createdAt DateTime  @default(now())
+}
+
+model ClinicSettings {
+  id            String  @id @default(cuid())
+  skinFee       Int     @default(4000)
+  hairFee       Int     @default(4000)
+  bothFee       Int     @default(8000)
+  openDays      String  @default("Thursday,Friday,Saturday")
+  openTime      String  @default("18:30")
+  closeTime     String  @default("20:30")
+  slotDuration  Int     @default(20)
+  discountPct   Int     @default(0)
+  discountLabel String?
+}
