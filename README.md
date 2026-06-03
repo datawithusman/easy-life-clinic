@@ -1,94 +1,184 @@
-# Easy Life Aesthetic Clinic — Booking & Management System
+<div align="center">
 
-A full-stack clinic booking application for **Easy Life Aesthetic Clinic** by Dr. Zakia Noor (FJMU), Lahore.
+# 🏥 Easy Life Clinic
+
+**Booking & Management System by Dr. Zakia Noor**
+
+[![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=next.js&logoColor=white)]()
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)]()
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)]()
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white)]()
+[![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white)]()
+
+*A modern, full-stack clinic management solution — from appointment booking to patient records, all in one place.*
+
+**[🌐 Live Demo](https://easy-life-clinic.vercel.app)** · **[📋 Book Appointment](#)**
+
+</div>
+
+---
 
 ## ✨ Features
 
-- **Patient Booking** — Multi-step booking wizard with service selection, date picker, payment upload
-- **Queue Management** — Automatic queue number assignment with drag-and-drop reorder
-- **Admin Dashboard** — Full control over settings, treatments, announcements, users, and analytics
-- **Assistant Panel** — Booking management with status updates (confirm, reject, skip, complete)
-- **Notifications** — WhatsApp (Twilio) and Email (Nodemailer) confirmations
-- **Payment Upload** — Payment proof upload via Supabase Storage
-- **Announcements** — Banner system for clinic updates and emergencies
-- **Responsive** — Mobile-first design with Tailwind CSS
+### For Patients
+- **📅 Online Booking** — Browse available time slots and book appointments in seconds
+- **👤 Patient Portal** — View appointment history, upcoming visits, and prescriptions
+- **📱 Responsive Design** — Works seamlessly on mobile, tablet, and desktop
 
-## 🏗️ Tech Stack
+### For Clinic Staff
+- **👨‍⚕️ Doctor Management** — Add doctors, set specialties, manage availability schedules
+- **📊 Dashboard Analytics** — Track appointments, patient flow, and revenue metrics
+- **🗂️ Patient Records** — Digital patient management with visit history
+- **🔔 Notifications** — Automated reminders for upcoming appointments
+- **🖨️ Export & Print** — Generate reports and patient summaries
 
-- **Framework:** Next.js 14 (App Router)
-- **Database:** Prisma ORM (SQLite for dev, PostgreSQL for production)
-- **Auth:** NextAuth.js (credentials-based)
-- **Styling:** Tailwind CSS
-- **Charts:** Recharts
-- **File Upload:** Supabase Storage
-- **Notifications:** Twilio WhatsApp + Nodemailer Gmail
-- **Drag & Drop:** @hello-pangea/dnd
+---
 
-## 🚀 Quick Start (Local Development)
+## 🛠️ Tech Stack
 
-```bash
-# Install dependencies
-npm install
+| Layer | Technology |
+|-------|-----------|
+| **Frontend** | Next.js 14, TypeScript, Tailwind CSS, Framer Motion |
+| **Backend** | Next.js API Routes, Server Actions |
+| **Database** | PostgreSQL with Prisma ORM |
+| **Auth** | NextAuth.js |
+| **Deployment** | Vercel (production) |
+| **Styling** | Tailwind CSS + shadcn/ui components |
 
-# Generate Prisma client
-npx prisma generate
+---
 
-# Create local SQLite database and seed
-npx prisma db push
-npm run db:seed
+## 📸 Screenshots
 
-# Start dev server
-npm run dev
+```
+┌──────────────────────────────────────────────────┐
+│                                                  │
+│   📅 Easy Life Clinic — Dashboard               │
+│   ┌──────────┐  ┌──────────┐  ┌──────────┐     │
+│   │ Today's  │  │  Total   │  │ Pending  │     │
+│   │    12    │  │  1,248   │  │    8     │     │
+│  Appointments│ │ Patients │ │ Follow-ups│     │
+│   └──────────┘  └──────────┘  └──────────┘     │
+│                                                  │
+│   Time    Patient        Doctor      Status      │
+│   ─────   ──────────     ────────    ──────      │
+│   09:00   Ahmed K.       Dr. Zakia   ✅ Done     │
+│   09:30   Sara M.        Dr. Zakia   🔄 In Prog │
+│   10:00   Omar H.        Dr. Ali     ⏳ Waiting │
+│                                                  │
+└──────────────────────────────────────────────────┘
 ```
 
-Open [http://localhost:3000](http://localhost:3000)
+> *Replace this with actual screenshots by adding: `![Dashboard](./screenshots/dashboard.png)`*
 
-### Default Accounts (after seeding)
+---
 
-| Role      | Email                            | Password            |
-|-----------|----------------------------------|---------------------|
-| Admin     | admin@easyliftclinic.com         | admin@clinic123     |
-| Assistant | assistant@easyliftclinic.com     | assistant@clinic123 |
-
-## 🌐 Deployment on Vercel
+## 🚀 Getting Started
 
 ### Prerequisites
 
-1. **Supabase** account (for PostgreSQL + file storage)
-2. **Vercel** account
-3. **Twilio** account (optional — WhatsApp notifications)
-4. **Gmail** with App Password (optional — email notifications)
+- Node.js 18+
+- PostgreSQL 14+
+- npm or yarn
 
-### Steps
+### Installation
 
-1. **Fork/Clone** this repository
-2. **Create a Supabase project** at [supabase.com](https://supabase.com)
-3. **Update `prisma/schema.prisma`** — change provider to `"postgresql"`
-4. **Add environment variables** in Vercel dashboard (see `.env.production.example`)
-5. **Deploy** — push to GitHub and connect to Vercel
+```bash
+# Clone the repository
+git clone https://github.com/datawithusman/easy-life-clinic.git
+cd easy-life-clinic
 
-### Required Environment Variables
+# Install dependencies
+npm install
 
-See [`.env.production.example`](./.env.production.example) for the full list.
+# Set up environment variables
+cp .env.example .env.local
+```
 
-> **Note:** All notification services (Twilio, Gmail) gracefully skip if credentials are not configured. The app works fully without them — notifications just won't be sent.
+### Environment Setup
+
+```env
+# .env.local
+DATABASE_URL="postgresql://user:password@localhost:5432/easy_life_clinic"
+NEXTAUTH_SECRET="your-secret-key"
+NEXTAUTH_URL="http://localhost:3000"
+```
+
+### Database Setup
+
+```bash
+# Run Prisma migrations
+npx prisma migrate dev
+
+# Seed with sample data (optional)
+npx prisma db seed
+```
+
+### Run Development Server
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) to see the app.
+
+---
 
 ## 📁 Project Structure
 
 ```
-clinic-app/
-├── app/
-│   ├── (auth)/          # Login & Register pages
-│   ├── (dashboard)/     # Admin & Assistant panels
-│   ├── (public)/        # Home, About, Treatments, Contact, Book, My Bookings
-│   └── api/             # REST API routes
-├── components/          # Reusable UI components
-├── lib/                 # Utilities, auth config, mailer, twilio, supabase
-├── prisma/              # Database schema and seed
-├── public/              # Static assets
-└── types/               # TypeScript type definitions
+easy-life-clinic/
+├── src/
+│   ├── app/
+│   │   ├── (auth)/          # Authentication pages
+│   │   ├── (dashboard)/     # Protected dashboard routes
+│   │   ├── api/             # API routes
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── components/
+│   │   ├── ui/              # shadcn/ui components
+│   │   ├── appointments/    # Booking components
+│   │   ├── patients/        # Patient management
+│   │   └── shared/          # Shared layout components
+│   ├── lib/
+│   │   ├── db.ts            # Prisma client
+│   │   ├── auth.ts          # NextAuth config
+│   │   └── utils.ts         # Utility functions
+│   └── types/               # TypeScript interfaces
+├── prisma/
+│   ├── schema.prisma
+│   ├── migrations/
+│   └── seed.ts
+├── public/                  # Static assets
+└── package.json
 ```
 
-## 📄 License
+---
 
-Private — Easy Life Aesthetic Clinic © 2024
+## 🚢 Deployment
+
+This project is deployed on **Vercel**:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/datawithusman/easy-life-clinic)
+
+1. Fork this repository
+2. Connect your Vercel account
+3. Add environment variables
+4. Deploy — done!
+
+---
+
+## 👤 Built by
+
+**Muhammad Usman** for **Dr. Zakia Noor — Easy Life Aesthetic Clinic**
+
+[![Portfolio](https://img.shields.io/badge/Portfolio-datawithusman.com-6C63FF?style=flat-square)](https://datawithusman.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://linkedin.com/in/datawithusman)
+[![GitHub](https://img.shields.io/badge/GitHub-datawithusman-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/datawithusman)
+
+---
+
+<div align="center">
+
+**Found this useful? Drop a ⭐ — it helps!**
+
+</div>
